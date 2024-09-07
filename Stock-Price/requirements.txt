@@ -4,3 +4,4 @@ requests==2.32.3
 streamlit==1.38.0
 yfinance==0.2.43
 setuptools>=58.0.4  # Adding setuptools to fix distutils error
+wheel>=0.38.4       # Add wheel to support building packages
