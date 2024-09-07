@@ -12,7 +12,14 @@ def set_custom_style():
         background: linear-gradient(to bottom right, #1a1a2e, #16213e, #0f3460);
         background-attachment: fixed;
     }
-                
+       /* Target the sidebar container */
+    .css-1lcbmhc {
+        font-size: 20px !important;  /* Increase the font size */
+    }
+    /* Target the radio buttons in the sidebar */
+    .css-qrbaxs {
+        font-size: 20px !important;  /* Adjust the font size here */
+    }
     .stButton > button {
         height: 3rem;
         padding: 0 1.5rem;
@@ -92,31 +99,21 @@ def set_custom_style():
     """, unsafe_allow_html=True)
 
 
-# Navbar styling and links
-def display_navbar():
-    
-    # Create columns for navigation buttons
-    col1, col2, col3, col4, col5 = st.columns([1, 1,1, 1, 1])
+def display_sidebar():
+    # Sidebar navigation with radio buttons for page selection
+    page = st.sidebar.radio("Navigate", ["Home", "Stock Analysis", "Stock News", "About", "Fun"])
 
-    # Create button-based navigation
-    with col1:
-        if st.button("Home"):
-            st.session_state["page"] = "home"
-    with col2:
-        if st.button("Stock Analysis"):
-            st.session_state["page"] = "stock_analysis"
-    with col3:
-        if st.button("Stock News"):
-            st.session_state["page"] = "news"
-    with col4:
-        if st.button("About"):
-            st.session_state["page"] = "about"
-    
-    with col5:
-        if st.button("Fun"):
-            st.session_state["page"] = "fun"
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Update session state based on selection
+    if page == "Home":
+        st.session_state["page"] = "home"
+    elif page == "Stock Analysis":
+        st.session_state["page"] = "stock_analysis"
+    elif page == "Stock News":
+        st.session_state["page"] = "news"
+    elif page == "About":
+        st.session_state["page"] = "about"
+    elif page == "Fun":
+        st.session_state["page"] = "fun"
 
 
 # Main function to handle page routing
@@ -128,7 +125,7 @@ def main():
     if "page" not in st.session_state:
         st.session_state["page"] = "home"
 
-    display_navbar()
+    display_sidebar()
 
     st.title("Stock Price App")
     
